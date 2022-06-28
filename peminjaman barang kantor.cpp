@@ -40,7 +40,7 @@ struct member{
 	char statmemb;	
 }brgmemb [100]; //dekkarasi
 	
-struct pinmemb{
+struct pinmemb{//membuat struct untuk member
 	int kopinj,p,kb,tb,tp,dp,km,tpin,tbalik;
 	char statp;
 }pmemb[100];
@@ -51,7 +51,7 @@ struct barang{ //membuat struktur barang
 	int b;
 }barang[100]; //deklarasikan
 
-struct pinjam{//membuat struktur pinjam
+struct pinjam{//membuat struct pinjam
 	int kodepinjam,d,kB,tglpin,tglbalik,dipinjam,kM;
 	string Namap;
 	string pt;
@@ -103,9 +103,9 @@ void menu(){
     cout<<"----------------------\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 3 ] = ";cin>>pil; 
     
-	if(pil ==1){ //input barang 
+	if(pil ==1){ //menu kelola barang utama
 		menukel();}
-	else if( pil == 2 ){ // melihat daftar barang yang sudah di masukkan
+	else if( pil == 2 ){ //menu peminjaman utama
 		mainpinjam();}
 	else if(pil == 3){ //keluar
 		cout<<"-- Anda Telah Logout -- \n";
@@ -135,7 +135,7 @@ void menukel(){
 		inputbarang();}
 	else if( no == 2 ){ // melihat daftar barang yang sudah di masukkan
 		tampilbarang();}
-	else if(no == 3){ // Input transaksi peminjaman barang
+	else if(no == 3){ // kembali ke menu utama
 		menu();}
 }
 void mainpinjam(){
@@ -149,11 +149,11 @@ void mainpinjam(){
     cout<<"[3]. kembali ke main menu   \n";
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 3] = ";cin>>no; 
-    if(no ==1){ //input barang 
+    if(no ==1){ //menu member 
 		menmemb();}
-	else if( no == 2 ){ // melihat daftar barang yang sudah di masukkan
+	else if( no == 2 ){ ///menu nonmember
 		menupnj();}
-	else if(no == 3){ //melihat laporan barang
+	else if(no == 3){ //menu utama
 	menu();}
 }
 void menupnj(){
@@ -168,13 +168,13 @@ void menupnj(){
     cout<<"[4]. Kembali Ke Menu Utama Peminjaman   \n";
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 4 ] = ";cin>>num; 
-    if(num ==1){ //input barang 
+    if(num ==1){ //transaksi peminjaman nonmemb 
 		transpinjam();}
-	else if( num == 2 ){ // melihat daftar barang yang sudah di masukkan
+	else if( num == 2 ){ // pengembalian nonmemb
 		pengembalian();}
-	else if(num == 3){ //melihat laporan barang
+	else if(num == 3){ //melihat laporan barang setelah peminjaman
 	laporanbarang();}
-	else if(num == 4){ // Input transaksi peminjaman barang
+	else if(num == 4){ // kembali ke menu peminjaman utama
 		mainpinjam();}	
 }
 
@@ -192,17 +192,17 @@ void menmemb(){
  	cout<<"[6]. Kembali Ke Menu Utama Peminjaman    \n";
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 6] = ";cin>>num; 
-	if(num ==1){ //input barang 
+	if(num ==1){ //daftar/ register member
 		dafmemb();}
-	else if(num == 2){ // Input transaksi peminjaman barang
+	else if(num == 2){ //melihat daftar member 
 		vmemb();}
-	else if(num == 3){ // Input transaksi peminjaman barang
+	else if(num == 3){ // transaksi peminjaman member
 		pinmemb();}
-		else if(num == 4){ // Input transaksi peminjaman barang
+		else if(num == 4){ // transaksi pengembalian member
 		blkm();}
-		else if(num == 5){ // Input transaksi peminjaman barang
+		else if(num == 5){ //melihat laporan barang setelah peminjaman
 		vpm();}
-	else if(num == 6){ // Input transaksi peminjaman barang
+	else if(num == 6){ // kembali ke menu peminjaman utama
 		mainpinjam();}
 }
 
@@ -242,7 +242,7 @@ void tampilbarang(){
 	system("cls");
 		cout<<"\n"<<endl;
 		cout << "\t ----------------------------------------------- "<<endl;
-		cout<<	"\t\t\tDaftar Barang      			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
+		cout<<	"\t\t\tDaftar Barang      			   "<<endl;//daftar barang setelah diinput
     	cout << "\t ----------------------------------------------- "<<endl;
 		cout<<endl;
 		cout<<"|---------------------------------------------------------------------------------------------|\n";
@@ -268,7 +268,7 @@ void transpinjam(){
 		system("cls");
 				cout<<"\n"<<endl;
 				cout << "\t ------------------------------------------------ "<<endl;
-				cout<<	"\t\t\tTransaksi Peminjaman     			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
+				cout<<	"\t\t\tTransaksi Peminjaman     			   "<<endl;
 		    	cout << "\t ------------------------------------------------ "<<endl;
 				cout<<endl;
 				
@@ -319,7 +319,7 @@ void pengembalian(){
 	system("cls");
 	cout<<"\n"<<endl;	
 		cout << "\t ------------------------------------------------ "<<endl;
-		cout <<	"\t\t\tTransaksi Pengembalian    			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
+		cout <<	"\t\t\tTransaksi Pengembalian    			   "<<endl;
     	cout << "\t ------------------------------------------------ "<<endl;
 			cout<<"\t\t\tMasukan kode Peminjaman :";cin>>kodepin; //memasukan kode peminjaman 
 			cout<<"\t\t\t\n"<<endl;
@@ -404,11 +404,9 @@ void laporanbarang(){
 					cout<<endl;
 				}
 			}
-			{
 		system("pause");
 		system("cls");
 		menupnj();
-	}
 }
 void dafmemb(){
 		
@@ -454,12 +452,9 @@ void vmemb(){
 			cout<<"| "<<setw(2)<<i+1<<setw(11)<<brgmemb[i].kodmemb<<setw(22)<<brgmemb[i].ptmemb<<setw(20)<<brgmemb[i].namemb<<setw(27)<<brgmemb[i].notelpmemb<<setw(20)<<brgmemb[i].almemb<<"     |";
 			cout<<endl;
 	}
-	{
-	
 		system("pause");
 		system("cls");
 		menmemb();	
-	}
 }
 
 
@@ -527,7 +522,7 @@ void pinmemb(){
 		system("cls");
 	cout<<"\n"<<endl;	
 		cout << "\t ------------------------------------------------ "<<endl;
-		cout<<	"\t\t\tTransaksi Pengembalian    			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
+		cout<<	"\t\t\tTransaksi Pengembalian    			   "<<endl;
     	cout << "\t ------------------------------------------------ "<<endl;
 			cout<<"\t\t\tMasukan kode Peminjaman :";cin>>kpm; //memasukan kode peminjaman 
 			cout<<"\t\t\t\n"<<endl;
@@ -542,7 +537,7 @@ void pinmemb(){
 					cout<<endl;
 					cout<<" Kontak Penyewa \t\t:"<<brgmemb[r].notelpmemb;
 					cout<<endl;
-					if(barang[r].kodeB==pmemb[r].kb){
+					if(barang[r].kodeB==pmemb[r].kb){ //kode barang sesuai
 						cout<<" Nama barang \t\t\t:"<<barang[r].Nama<<endl;
 					}
 					cout<<" Tanggal Pinjam (DDMMYYYY)\t:"<<pmemb[r].tpin;
@@ -624,12 +619,9 @@ void vpm(){
 }	
 
 }
-{
-
 system("pause");
 		system("cls");
-
-}		menmemb();
+		menmemb();
 }
 	
 
