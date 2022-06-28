@@ -404,9 +404,11 @@ void laporanbarang(){
 					cout<<endl;
 				}
 			}
+			{
 		system("pause");
 		system("cls");
 		menupnj();
+	}
 }
 void dafmemb(){
 		
@@ -452,9 +454,12 @@ void vmemb(){
 			cout<<"| "<<setw(2)<<i+1<<setw(11)<<brgmemb[i].kodmemb<<setw(22)<<brgmemb[i].ptmemb<<setw(20)<<brgmemb[i].namemb<<setw(27)<<brgmemb[i].notelpmemb<<setw(20)<<brgmemb[i].almemb<<"     |";
 			cout<<endl;
 	}
+	{
+	
 		system("pause");
 		system("cls");
 		menmemb();	
+	}
 }
 
 
@@ -619,9 +624,12 @@ void vpm(){
 }	
 
 }
+{
+
 system("pause");
 		system("cls");
-		menmemb();
+
+}		menmemb();
 }
 	
 
