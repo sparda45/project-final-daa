@@ -45,7 +45,7 @@ struct pinmemb{//membuat struct untuk member
 	char statp;
 }pmemb[100];
 
-struct barang{ //membuat struktur barang
+struct barang{ //membuat struct barang
 	int kodeB,sewa,stock;
 	string Nama;
 	int b;
