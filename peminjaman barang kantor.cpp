@@ -24,14 +24,18 @@ void vmemb();
 void pinmemb();
 void vpm();
 void blkm();
+void hapusbrg();
+void hapusmember();
+void editb();
+void edm();
 
 //variabel
-int jmlbuk,a,c,e,f,g,h,i,jmlpin,hs,lp,kodepin,stok,hsmem,lama,discmem,q,r,kpm;
+int jmlbuk,a,c,e,f,g,h,i,jmlpin,hs,lp,kodepin,stok,hsmem,lama,discmem,q,r,kpm,j,k,l,v;
 int b =-1,d =-1, m = -1, p =-1;
 char yn,ch,temp,yb;
 	
-// mendefinisikan struct	
-struct member{
+// mendefinisikan struct
+struct member{//membuat struct untuk member
 	int kodmemb;
 	string namemb;
 	string ptmemb;
@@ -40,18 +44,18 @@ struct member{
 	char statmemb;	
 }brgmemb [100]; //dekkarasi
 	
-struct pinmemb{//membuat struct untuk member
+struct pinmemb{//membuat struct pinjam member
 	int kopinj,p,kb,tb,tp,dp,km,tpin,tbalik;
 	char statp;
 }pmemb[100];
 
-struct barang{ //membuat struct barang
+struct barang{ //membuat struktur barang
 	int kodeB,sewa,stock;
 	string Nama;
 	int b;
 }barang[100]; //deklarasikan
 
-struct pinjam{//membuat struct pinjam
+struct pinjam{//membuat struktur pinjam
 	int kodepinjam,d,kB,tglpin,tglbalik,dipinjam,kM;
 	string Namap;
 	string pt;
@@ -99,13 +103,13 @@ void menu(){
     cout << " ------------------------------------------------ "<<endl<<endl;
     cout<<"[1]. Menu Kelola Barang       \n";
     cout<<"[2]. Menu Peminjaman       \n";
-    cout<<"[3]. Exit                \n";
+    cout<<"[3]. Log Out               \n";
     cout<<"----------------------\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 3 ] = ";cin>>pil; 
     
-	if(pil ==1){ //menu kelola barang utama
+	if(pil ==1){ //input barang 
 		menukel();}
-	else if( pil == 2 ){ //menu peminjaman utama
+	else if( pil == 2 ){ ///menu peminjaman utama
 		mainpinjam();}
 	else if(pil == 3){ //keluar
 		cout<<"-- Anda Telah Logout -- \n";
@@ -126,16 +130,23 @@ void menukel(){
 	cout << " ------------------------------------------------ "<<endl;
 	cout<<	"\t\tMenu Kelola Barang	       			   "<<endl;
     cout << " ------------------------------------------------ "<<endl<<endl;
-    cout<<"[1]. Input barang       \n";
+    cout<<"[1]. Input Barang       \n";
     cout<<"[2]. Tampil Data Barang    \n";
- 	cout<<"[3]. kembali ke main menu    \n";
+    cout<<"[3]. Edit Harga   \n";
+	cout<<"[4]. Hapus Data  \n";
+ 	cout<<"[5]. Kembali Ke Main Menu    \n";
+ 	
     cout<<"=======================\n";
-    cout<<"Masukan Pilihan anda[ 1 s.d. 3] = ";cin>>no; 
+    cout<<"Masukan Pilihan anda[ 1 s.d. 5] = ";cin>>no; 
 	if(no ==1){ //input barang 
 		inputbarang();}
 	else if( no == 2 ){ // melihat daftar barang yang sudah di masukkan
 		tampilbarang();}
-	else if(no == 3){ // kembali ke menu utama
+		else if(no == 3){ // edit harga
+		 editb();}
+	else if(no == 4){ // hapus data
+	hapusbrg();}
+		else if(no == 5){ // kembali ke menu utama
 		menu();}
 }
 void mainpinjam(){
@@ -146,12 +157,12 @@ void mainpinjam(){
     cout << " ------------------------------------------------ "<<endl<<endl;
   	cout<<"[1]. Member      \n";
     cout<<"[2]. Non-Member    \n";
-    cout<<"[3]. kembali ke main menu   \n";
+    cout<<"[3]. Kembali Ke Main Menu  \n";
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 3] = ";cin>>no; 
-    if(no ==1){ //menu member 
+    if(no ==1){  //menu member 
 		menmemb();}
-	else if( no == 2 ){ ///menu nonmember
+	else if( no == 2 ){ //menu nonmember
 		menupnj();}
 	else if(no == 3){ //menu utama
 	menu();}
@@ -167,12 +178,12 @@ void menupnj(){
     cout<<"[3]. Laporan   \n";
     cout<<"[4]. Kembali Ke Menu Utama Peminjaman   \n";
     cout<<"=======================\n";
-    cout<<"Masukan Pilihan anda[ 1 s.d. 4 ] = ";cin>>num; 
+    cout<<"Masukan Pilihan anda[ 1 s.d. 4] = ";cin>>num; 
     if(num ==1){ //transaksi peminjaman nonmemb 
 		transpinjam();}
 	else if( num == 2 ){ // pengembalian nonmemb
 		pengembalian();}
-	else if(num == 3){ //melihat laporan barang setelah peminjaman
+	else if(num == 3){ //melihat laporan barang setelah transaksi
 	laporanbarang();}
 	else if(num == 4){ // kembali ke menu peminjaman utama
 		mainpinjam();}	
@@ -184,26 +195,32 @@ void menmemb(){
 	cout << " ------------------------------------------------ "<<endl;
 	cout<<	"\t\tMenu Khusus Member       			   "<<endl;
     cout << " ------------------------------------------------ "<<endl<<endl;
-    cout<<"[1]. Daftar member      \n";
-    cout<<"[2]. Tampil Data member    \n";
-    cout<<"[3]. Pinjam Member    \n";
-  	cout<<"[4]. Pengembalian Member    \n";
-  	cout<<"[5]. laporan member    \n";
- 	cout<<"[6]. Kembali Ke Menu Utama Peminjaman    \n";
+    cout<<"[1]. Daftar Member      \n";
+    cout<<"[2]. Tampil Data Member    \n";
+    cout<<"[3]. Edit Member    \n";
+    cout<<"[4]. Hapus Member    \n";
+    cout<<"[5]. Pinjam Member    \n";
+  	cout<<"[6]. Pengembalian Member    \n";
+  	cout<<"[7]. Laporan Member    \n";
+ 	cout<<"[8]. Kembali Ke Menu Utama Peminjaman    \n";
     cout<<"=======================\n";
-    cout<<"Masukan Pilihan anda[ 1 s.d. 6] = ";cin>>num; 
+    cout<<"Masukan Pilihan anda[ 1 s.d. 8] = ";cin>>num; 
 	if(num ==1){ //daftar/ register member
 		dafmemb();}
-	else if(num == 2){ //melihat daftar member 
+	else if(num == 2){  //melihat daftar member 
 		vmemb();}
-	else if(num == 3){ // transaksi peminjaman member
+		else if(num == 3){ //edit data member
+		edm();}
+		else if(num == 4){ //hapus data member
+		hapusmember();}
+	else if(num == 5){  // transaksi peminjaman member
 		pinmemb();}
-		else if(num == 4){ // transaksi pengembalian member
+		else if(num == 6){  // transaksi pengembalian member
 		blkm();}
-		else if(num == 5){ //melihat laporan barang setelah peminjaman
+	else if(num == 7){ //melihat laporan barang setelah transaksi
 		vpm();}
-	else if(num == 6){ // kembali ke menu peminjaman utama
-		mainpinjam();}
+		else if(num == 8){ // kembali ke menu peminjaman utama
+	mainpinjam();}
 }
 
 void inputbarang(){
@@ -258,17 +275,64 @@ void tampilbarang(){
 		cout<<endl;
 		system("pause");
 		system("cls");
-		menukel();
-	}
+		menukel();}
 }
 
+void hapusbrg(){
+	int kh;
+	 system ("cls");
+  cout<<"\n PENGHAPUSAN DATA PADA DATA BARANG\n";
+  cout<<" __\n\n";
+  
+  cout<<" Masukan Kode Barang : "; cin>>kh;
+     cout<<endl;
+	for(c=0;c<=b;c++){
+	if(barang[c].kodeB == kh){
+		for(j=c;j<b+1;j++){
+			barang[j]=barang[j+1];	
+		}
+		cout<<" DATA BERHASIL DI HAPUS\n\n";
+		b--;
+	}}
+	{
+		cout<<endl;
+		system("pause");
+		system("cls");
+		menukel();}
+}
+
+void editb(){
+int keb;
+	
+	system ("cls");
+  cout<<"\n Pengeditan Harga Barang\n";
+  cout<<" __\n\n";
+  
+  cout<<" Masukan kode  barang : "; cin>>keb;
+     cout<<endl;
+	for(c=0;c<=b;c++){
+	if(barang[c].kodeB == keb){
+		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
+		cout<<" Harga barang \t\t\t: "<<barang[c].sewa<<endl;
+		for(l=c;l<b+1;l++){
+			cout << "Masukkan harga baru = "; cin >>barang[l].sewa ;	
+		}
+		cout<<" DATA BERHASIL DIEDIT\n\n";
+	}}
+	{
+		cout<<endl;
+		system("pause");
+		system("cls");
+		menukel();
+	}
+}	
 
 void transpinjam(){
 		d++;
 		system("cls");
 				cout<<"\n"<<endl;
 				cout << "\t ------------------------------------------------ "<<endl;
-				cout<<	"\t\t\tTransaksi Peminjaman     			   "<<endl;
+				cout<<	"\t\t\tTransaksi Peminjaman     			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
 		    	cout << "\t ------------------------------------------------ "<<endl;
 				cout<<endl;
 				
@@ -319,7 +383,7 @@ void pengembalian(){
 	system("cls");
 	cout<<"\n"<<endl;	
 		cout << "\t ------------------------------------------------ "<<endl;
-		cout <<	"\t\t\tTransaksi Pengembalian    			   "<<endl;
+		cout <<	"\t\t\tTransaksi Pengembalian    			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
     	cout << "\t ------------------------------------------------ "<<endl;
 			cout<<"\t\t\tMasukan kode Peminjaman :";cin>>kodepin; //memasukan kode peminjaman 
 			cout<<"\t\t\t\n"<<endl;
@@ -379,6 +443,7 @@ void pengembalian(){
 				}
 			}
 }
+
 void laporanbarang(){
 	system("cls");
 			cout<<"\n"<<endl;	
@@ -404,10 +469,12 @@ void laporanbarang(){
 					cout<<endl;
 				}
 			}
+			{	
 		system("pause");
 		system("cls");
-		menupnj();
+		menupnj();}
 }
+
 void dafmemb(){
 		
 		system("cls");
@@ -435,8 +502,8 @@ void dafmemb(){
 				system("cls");
 				menmemb();
 			}
-	
 }
+
 void vmemb(){
 	system ("cls");
 	
@@ -452,11 +519,11 @@ void vmemb(){
 			cout<<"| "<<setw(2)<<i+1<<setw(11)<<brgmemb[i].kodmemb<<setw(22)<<brgmemb[i].ptmemb<<setw(20)<<brgmemb[i].namemb<<setw(27)<<brgmemb[i].notelpmemb<<setw(20)<<brgmemb[i].almemb<<"     |";
 			cout<<endl;
 	}
-		system("pause");
-		system("cls");
-		menmemb();	
+	{
+	system("pause");
+	system("cls");
+	menmemb();	}
 }
-
 
 void pinmemb(){
 	p++;
@@ -469,8 +536,9 @@ void pinmemb(){
 	cout<<" Kode Pinjaman \t\t\t: ";scanf("%d%c", &pmemb[p].kopinj, &temp);
 	cout<<" Kode Member \t\t\t: ";scanf("%d%c", &pmemb[p].km, &temp);
 	cout<<" Kode Barang \t\t\t: ";scanf("%d%c", &pmemb[p].kb, &temp);
-	if(barang[c].kodeB == pmemb[p].kb){
+	
 	for(c=0;c<=b;c++){
+	if(barang[c].kodeB == pmemb[p].kb){
 	cout<<" Nama Barang \t\t\t: "<<barang[c].Nama<<endl;
 	for(i=0; i<=m;i++){
 	if(brgmemb[i].kodmemb == pmemb[p].km){
@@ -502,27 +570,20 @@ void pinmemb(){
 						cout<<"\n Data Member Tidak Ditemukan \n";
 						system("pause");
 						system("cls");
-						pinmemb();}
-			else if (barang[c].kodeB != pmemb[p].kb){
-						cout<<"\n Data BARANG Tidak Ditemukan \n";
-						system("pause");
-						system("cls");
-						pinmemb();}
+						menmemb();}
 			
-		}}}	else if (barang[c].kodeB != pmemb[p].kb){
+		}	}else if (barang[c].kodeB != pmemb[p].kb){
 						cout<<"\n Data BARANG Tidak Ditemukan \n";
 						system("pause");
 						system("cls");
-						pinmemb();}}
+						menmemb();}}}
 				
 				
-	void blkm(){
-		
-		
-		system("cls");
+void blkm(){
+	system("cls");
 	cout<<"\n"<<endl;	
 		cout << "\t ------------------------------------------------ "<<endl;
-		cout<<	"\t\t\tTransaksi Pengembalian    			   "<<endl;
+		cout<<	"\t\t\tTransaksi Pengembalian    			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
     	cout << "\t ------------------------------------------------ "<<endl;
 			cout<<"\t\t\tMasukan kode Peminjaman :";cin>>kpm; //memasukan kode peminjaman 
 			cout<<"\t\t\t\n"<<endl;
@@ -537,7 +598,7 @@ void pinmemb(){
 					cout<<endl;
 					cout<<" Kontak Penyewa \t\t:"<<brgmemb[r].notelpmemb;
 					cout<<endl;
-					if(barang[r].kodeB==pmemb[r].kb){ //kode barang sesuai
+					if(barang[r].kodeB==pmemb[r].kb){
 						cout<<" Nama barang \t\t\t:"<<barang[r].Nama<<endl;
 					}
 					cout<<" Tanggal Pinjam (DDMMYYYY)\t:"<<pmemb[r].tpin;
@@ -588,10 +649,68 @@ void pinmemb(){
 			}
 }
 		
-		
-		
-		
-				
+void hapusmember(){
+int khm;
+	 system ("cls");
+  cout<<"\n PENGHAPUSAN DATA MEMBER\n";
+  cout<<" __\n\n";
+  
+  cout<<" Masukan Kode  Member : "; cin>>khm;
+     cout<<endl;
+	for(i=0; i<=m;i++){
+	if(brgmemb[i].kodmemb  == khm){
+		for(k=i;k<m+1;k++){
+			brgmemb[k]=brgmemb[k+1];
+		}
+		cout<<" DATA BERHASIL DI HAPUS\n\n";
+		m--;
+	}	
+}
+	{
+		cout<<endl;
+		system("pause");
+		system("cls");
+		menmemb();}			
+}
+
+
+void edm(){
+int kem;
+
+system ("cls");
+  cout<<"\n PENGEDITAN DATA MEMBER\n";
+  cout<<" __\n\n";
+  
+  cout<<" masukan kode  member : "; cin>>kem;
+     cout<<endl;
+	for(i=0; i<=m;i++){
+	if(brgmemb[i].kodmemb  == kem){
+	
+cout<<" Nama PT \t\t\t: "<<brgmemb[i].ptmemb<<endl;
+		cout<<" Nama Perwakilan PT \t\t: "<<brgmemb[i].namemb<<endl;
+		cout<<" Alamat Member \t\t\t: "<<brgmemb[i].almemb<<endl;
+		cout<<" Kontak Member \t\t\t: "<<brgmemb[i].notelpmemb<<endl;	
+	
+	for(v=i;v<m+1;v++){
+		cout<<"=====================\n\n";
+		cout<<" Nama  PT  \t\t\t:";
+				fflush(stdin);
+				getline(cin,brgmemb[v].ptmemb);
+				cout<<" Nama  perwakilan PT \t\t:";getline(cin,brgmemb[v].namemb);
+				cout<<" Alamat Member \t\t:";getline(cin, brgmemb[v].almemb);
+				cout<<" Kontak Member \t\t:";getline(cin, brgmemb[v].notelpmemb);				
+		}
+	cout<<" DATA BERHASIL DIEDIT\n\n";
+	}
+}
+	{
+		cout<<endl;
+		system("pause");
+		system("cls");
+		menmemb();
+	}
+}
+
 
 void vpm(){
 	q++;
@@ -623,8 +742,6 @@ system("pause");
 		system("cls");
 		menmemb();
 }
-	
-
 					
 int main(){
 	login();
