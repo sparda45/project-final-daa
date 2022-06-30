@@ -314,8 +314,8 @@ int keb;
 	if(barang[c].kodeB == keb){
 		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
 		cout<<" Harga barang \t\t\t: "<<barang[c].sewa<<endl;
-		for(l=c;l<b+1;l++){
-			cout << "Masukkan harga baru = "; cin >>barang[l].sewa ;	
+		for(l=c;l<=c;l++){
+			cout << " Masukkan harga baru \t\t: "; cin >>barang[l].sewa ;	
 		}
 		cout<<" DATA BERHASIL DIEDIT\n\n";
 	}}
@@ -359,7 +359,12 @@ void transpinjam(){
 				cout<<endl;
 				cout<<" Status dipinjam (y) ? \t\t: ";cin>>pinjambrg[d].status;
 				cout<<endl;
-				
+			} else if (barang[c].kodeB != pinjambrg[d].kB){
+						cout<<"\n Data barang Tidak Ditemukan \n";
+						system("pause");
+						system("cls");
+						transpinjam();
+					}		
 			cout<<"Apakah Anda Ingin Menambahkan Data Lagi ? (y/n) :";cin>>yn;
 			if(yn=='y'||yn=='Y'){
 				transpinjam();
@@ -368,12 +373,7 @@ void transpinjam(){
 				system("pause");
 				system("cls");
 				menupnj();}
-			} else if (barang[c].kodeB != pinjambrg[d].kB){
-						cout<<"\n Data barang Tidak Ditemukan \n";
-						system("pause");
-						system("cls");
-						transpinjam();
-					}	
+			
 				}
 				
 }
@@ -557,7 +557,18 @@ void pinmemb(){
 				cout<<endl;
 				cout<<" Status dipinjam (y) ? \t\t: ";cin>>pmemb[p].statp;
 				cout<<endl;
-				
+			} else if (brgmemb[i].kodmemb != pmemb[p].km){
+						cout<<"\n Data Member Tidak Ditemukan \n";
+						system("pause");
+						system("cls");
+						menmemb();}
+			
+		}	} else if (barang[c].kodeB != pmemb[p].kb){
+						cout<<"\n Data BARANG Tidak Ditemukan \n";
+						system("pause");
+						system("cls");
+						menmemb();}	
+						
 			cout<<"Apakah Anda Ingin Menambahkan Data Lagi ? (y/n) :";cin>>yn;
 			if(yn=='y'||yn=='Y'){
 				pinmemb();
@@ -566,17 +577,7 @@ void pinmemb(){
 				system("pause");
 				system("cls");
 				menmemb();}
-			} else if (brgmemb[i].kodmemb != pmemb[p].km){
-						cout<<"\n Data Member Tidak Ditemukan \n";
-						system("pause");
-						system("cls");
-						menmemb();}
-			
-		}	}else if (barang[c].kodeB != pmemb[p].kb){
-						cout<<"\n Data BARANG Tidak Ditemukan \n";
-						system("pause");
-						system("cls");
-						menmemb();}}}
+			}}
 				
 				
 void blkm(){
@@ -691,7 +692,7 @@ cout<<" Nama PT \t\t\t: "<<brgmemb[i].ptmemb<<endl;
 		cout<<" Alamat Member \t\t\t: "<<brgmemb[i].almemb<<endl;
 		cout<<" Kontak Member \t\t\t: "<<brgmemb[i].notelpmemb<<endl;	
 	
-	for(v=i;v<m+1;v++){
+	for(v=i;v<=i;v++){
 		cout<<"=====================\n\n";
 		cout<<" Nama  PT  \t\t\t:";
 				fflush(stdin);
