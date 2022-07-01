@@ -1,8 +1,8 @@
 //header
-#include <iostream> // Di gunakan untuk menjalankan perintah input dan output. seperti cin, cout.
+#include <iostream> // Di gunakan untuk menjalankan perintah input dan output. seperti cin, cout
 #include <conio.h> // Di gunakan untuk membuat antarmuka dengan pengguna. seperti getch
 #include <string.h> // Di gunakan untuk membaca String
-#include <dos.h> // Di gunakan untuk membuat perintah delay.
+#include <dos.h> // Di gunakan untuk membuat perintah delay
 #include<iomanip> // Digunakan untuk ngerapihin spasi membuat table
 #include<cstdlib> // Header yang berisi fungsi-fungsi umum termasuk manajemen pengelolaan memori, pembuatan angka acak, berkomunikasi dengan environment, aritmatika, pencarian, pengurutan, dan konversi. 
 using namespace std; //Menggunakan skope std sebagai Nama skope untuk penggunaan instruksi, misalnya std::cin std::cout 
