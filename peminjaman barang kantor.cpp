@@ -1,8 +1,7 @@
-//header
-#include <iostream> // Di gunakan untuk menjalankan perintah input dan output. seperti cin, cout
+#include <iostream> // Di gunakan untuk menjalankan perintah input dan output. seperti cin, cout.
 #include <conio.h> // Di gunakan untuk membuat antarmuka dengan pengguna. seperti getch
 #include <string.h> // Di gunakan untuk membaca String
-#include <dos.h> // Di gunakan untuk membuat perintah delay
+#include <dos.h> // Di gunakan untuk membuat perintah delay.
 #include<iomanip> // Digunakan untuk ngerapihin spasi membuat table
 #include<cstdlib> // Header yang berisi fungsi-fungsi umum termasuk manajemen pengelolaan memori, pembuatan angka acak, berkomunikasi dengan environment, aritmatika, pencarian, pengurutan, dan konversi. 
 using namespace std; //Menggunakan skope std sebagai Nama skope untuk penggunaan instruksi, misalnya std::cin std::cout 
@@ -50,7 +49,7 @@ struct pinmemb{//membuat struct pinjam member
 }pmemb[100];
 
 struct barang{ //membuat struktur barang
-	int kodeB,sewa,stock;
+	int kodeB,sewa,stock,pt;
 	string Nama;
 	int b;
 }barang[100]; //deklarasikan
@@ -257,6 +256,7 @@ void inputbarang(){
 
 void tampilbarang(){
 	system("cls");
+	barang[c].pt= pinjambrg[c].dipinjam +pmemb[c].dp;
 		cout<<"\n"<<endl;
 		cout << "\t ----------------------------------------------- "<<endl;
 		cout<<	"\t\t\tDaftar Barang      			   "<<endl;//daftar barang setelah diinput
@@ -266,8 +266,8 @@ void tampilbarang(){
 		cout<<"|  No    Kode Barang         Nama barang         Harga Sewa    Jumlah barang    Barang Keluar |\n";
 		cout<<"|---------------------------------------------------------------------------------------------|\n";
 		for(c=0;c<=b;c++){
-			stok = barang[c].stock-pinjambrg[c].dipinjam;
-			cout<<"| "<<setw(2)<<c+1<<setw(11)<<barang[c].kodeB<<setw(25)<<barang[c].Nama<<setw(17)<<barang[c].sewa<<setw(14)<<stok<<setw(16)<<pinjambrg[c].dipinjam<<"       |";
+			stok = barang[c].stock-barang[c].pt;
+			cout<<"| "<<setw(2)<<c+1<<setw(11)<<barang[c].kodeB<<setw(25)<<barang[c].Nama<<setw(17)<<barang[c].sewa<<setw(14)<<stok<<setw(16)<<barang[c].pt<<"       |";
 			cout<<endl;
 		}
 		
@@ -698,8 +698,8 @@ cout<<" Nama PT \t\t\t: "<<brgmemb[i].ptmemb<<endl;
 				fflush(stdin);
 				getline(cin,brgmemb[v].ptmemb);
 				cout<<" Nama  perwakilan PT \t\t:";getline(cin,brgmemb[v].namemb);
-				cout<<" Alamat Member \t\t:";getline(cin, brgmemb[v].almemb);
-				cout<<" Kontak Member \t\t:";getline(cin, brgmemb[v].notelpmemb);				
+				cout<<" Alamat Member \t\t\t:";getline(cin, brgmemb[v].almemb);
+				cout<<" Kontak Member \t\t\t:";getline(cin, brgmemb[v].notelpmemb);				
 		}
 	cout<<" DATA BERHASIL DIEDIT\n\n";
 	}
@@ -746,5 +746,5 @@ system("pause");
 					
 int main(){
 	login();
-	menu(); //mulai menu		
+	menu(); //mulai menu
 }
