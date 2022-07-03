@@ -714,6 +714,7 @@ cout<<" Nama PT \t\t\t: "<<brgmemb[i].ptmemb<<endl;
 
 
 void vpm(){
+	system("cls");
 	q++;
 			cout<<"\n"<<endl;	
 			cout<<"\t ------------------------------------------------ "<<endl;
