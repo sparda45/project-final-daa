@@ -27,6 +27,7 @@ void hapusbrg();
 void hapusmember();
 void editb();
 void edm();
+void stkb();
 
 //variabel
 int jmlbuk,a,c,e,f,g,h,i,jmlpin,hs,lp,kodepin,stok,hsmem,lama,discmem,q,r,kpm,j,k,l,v;
@@ -132,8 +133,9 @@ void menukel(){
     cout<<"[1]. Input Barang       \n";
     cout<<"[2]. Tampil Data Barang    \n";
     cout<<"[3]. Edit Harga   \n";
-	cout<<"[4]. Hapus Data  \n";
- 	cout<<"[5]. Kembali Ke Main Menu    \n";
+    cout<<"[4]. Edit Stock   \n";
+	cout<<"[5]. Hapus Data  \n";
+ 	cout<<"[6]. Kembali Ke Main Menu    \n";
  	
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 5] = ";cin>>no; 
@@ -143,9 +145,11 @@ void menukel(){
 		tampilbarang();}
 		else if(no == 3){ // edit harga
 		 editb();}
-	else if(no == 4){ // hapus data
+		 	else if(no == 4){ // hapus data
+	stkb();}
+	else if(no == 5){ // hapus data
 	hapusbrg();}
-		else if(no == 5){ // kembali ke menu utama
+		else if(no == 6){ // kembali ke menu utama
 		menu();}
 }
 void mainpinjam(){
@@ -314,6 +318,38 @@ void hapusbrg(){
 		menukel();}
 }
 
+void stkb(){
+	
+	int stk;
+	
+	system ("cls");
+  cout<<"\n Pengeditan Stok barang\n";
+  cout<<" __\n\n";
+  
+  cout<<" Masukan kode  barang : "; cin>>stk;
+     cout<<endl;
+	for(c=0;c<=b;c++){
+	if(barang[c].kodeB == stk){
+		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
+		cout<<" Stock barang \t\t\t: "<<barang[c].stock<<endl;
+		for(l=c;l<=c;l++){
+			cout << " Masukkan stock baru \t\t: "; cin >>barang[l].stock ;	
+		}
+		cout<<" STOCK BERHASIL DIEDIT\n\n";
+	}}
+	{
+		cout<<endl;
+		system("pause");
+		system("cls");
+		menukel();
+	}
+	
+	
+	
+	
+	
+	
+}
 void editb(){
 int keb;
 	
