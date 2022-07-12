@@ -335,7 +335,7 @@ int keb;
 		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
 		cout<<" Stock Barang \t\t\t: "<<barang[c].stock<<endl;
 		for(l=c;l<=c;l++){
-			cout << " Masukkan Stock aru       : "; cin >>barang[l].stock;	
+			cout << " Masukkan Stock Terbaru\t\t: "; cin >>barang[l].stock;	
 			cout<<" DATA BERHASIL DIEDIT\n\n";
 		}}
 		else if(plh==2){
@@ -350,7 +350,7 @@ int keb;
 		cout<<" Stock Barang \t\t\t: "<<barang[c].stock<<endl;
 		cout<<" Harga Barang \t\t\t: "<<barang[c].sewa<<endl;
 		for(l=c;l<=c;l++){
-			cout << " Masukkan Stock Terbaru      : "; cin >>barang[l].stock;	
+			cout << " Masukkan Stock Terbaru\t\t: "; cin >>barang[l].stock;	
 			cout << " Masukkan Harga Baru \t\t: "; cin >>barang[l].sewa ;	
 			cout<<" DATA BERHASIL DIEDIT\n\n";
 		}}
