@@ -27,10 +27,9 @@ void hapusbrg();
 void hapusmember();
 void editb();
 void edm();
-void stkb();
 
 //variabel
-int jmlbuk,a,c,e,f,g,h,i,jmlpin,hs,lp,kodepin,stok,hsmem,lama,discmem,q,r,kpm,j,k,l,v;
+int jmlbuk,a,c,e,f,g,h,i,jmlpin,hs,lp,kodepin,stok,stoktambah,hsmem,lama,discmem,q,r,kpm,j,k,l,v,denda,lpin,lampin;
 int b =-1,d =-1, m = -1, p =-1;
 char yn,ch,temp,yb;
 	
@@ -45,7 +44,7 @@ struct member{//membuat struct untuk member
 }brgmemb [100]; //dekkarasi
 	
 struct pinmemb{//membuat struct pinjam member
-	int kopinj,p,kb,tb,tp,dp,km,tpin,tbalik,dikem;
+	int kopinj,p,kb,tb,tp,dp,km,tpin,tbalik,tbl;
 	char statp;
 }pmemb[100];
 
@@ -56,7 +55,7 @@ struct barang{ //membuat struktur barang
 }barang[100]; //deklarasikan
 
 struct pinjam{//membuat struktur pinjam
-	int kodepinjam,d,kB,tglpin,tglbalik,dipinjam,kM,balik;
+	int kodepinjam,d,kB,tglpin,tglbalik,dipinjam,tblk,kM,telat;
 	string Namap;
 	string pt;
 	string alamat;
@@ -132,10 +131,9 @@ void menukel(){
     cout << " ------------------------------------------------ "<<endl<<endl;
     cout<<"[1]. Input Barang       \n";
     cout<<"[2]. Tampil Data Barang    \n";
-    cout<<"[3]. Edit Harga   \n";
-    cout<<"[4]. Edit Stock   \n";
-	cout<<"[5]. Hapus Data  \n";
- 	cout<<"[6]. Kembali Ke Main Menu    \n";
+    cout<<"[3]. Edit Data   \n";
+	cout<<"[4]. Hapus Data  \n";
+ 	cout<<"[5]. Kembali Ke Main Menu    \n";
  	
     cout<<"=======================\n";
     cout<<"Masukan Pilihan anda[ 1 s.d. 5] = ";cin>>no; 
@@ -145,11 +143,9 @@ void menukel(){
 		tampilbarang();}
 		else if(no == 3){ // edit harga
 		 editb();}
-		 	else if(no == 4){ // hapus data
-	stkb();}
-	else if(no == 5){ // hapus data
+	else if(no == 4){ // hapus data
 	hapusbrg();}
-		else if(no == 6){ // kembali ke menu utama
+		else if(no == 5){ // kembali ke menu utama
 		menu();}
 }
 void mainpinjam(){
@@ -318,56 +314,51 @@ void hapusbrg(){
 		menukel();}
 }
 
-void stkb(){
-	
-	int stk;
-	
-	system ("cls");
-  cout<<"\n Pengeditan Stok barang\n";
-  cout<<" __\n\n";
-  
-  cout<<" Masukan kode  barang : "; cin>>stk;
-     cout<<endl;
-	for(c=0;c<=b;c++){
-	if(barang[c].kodeB == stk){
-		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
-		cout<<" Stock barang \t\t\t: "<<barang[c].stock<<endl;
-		for(l=c;l<=c;l++){
-			cout << " Masukkan stock baru \t\t: "; cin >>barang[l].stock ;	
-		}
-		cout<<" STOCK BERHASIL DIEDIT\n\n";
-	}}
-	{
-		cout<<endl;
-		system("pause");
-		system("cls");
-		menukel();
-	}
-	
-	
-	
-	
-	
-	
-}
 void editb(){
 int keb;
-	
+	int plh;
 	system ("cls");
-  cout<<"\n Pengeditan Harga Barang\n";
+  cout<<"\n Pengeditan Data Barang\n";
   cout<<" __\n\n";
   
   cout<<" Masukan kode  barang : "; cin>>keb;
      cout<<endl;
 	for(c=0;c<=b;c++){
 	if(barang[c].kodeB == keb){
+		cout<<" [1].Edit Stok "<<endl;
+		cout<<" [2].Edit Harga "<<endl;
+		cout<<" [3].Edit Keduanya "<<endl;
+		cout<<" [4].Batalkan Edit "<<endl;
+		cout<<"masukkan pilihan anda (1-4): ";
+		cin>>plh;
+		if(plh==1){
 		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
-		cout<<" Harga barang \t\t\t: "<<barang[c].sewa<<endl;
+		cout<<" Stock Barang \t\t\t: "<<barang[c].stock<<endl;
 		for(l=c;l<=c;l++){
-			cout << " Masukkan harga baru \t\t: "; cin >>barang[l].sewa ;	
+			cout << " Masukkan Stock aru       : "; cin >>barang[l].stock;	
+			cout<<" DATA BERHASIL DIEDIT\n\n";
+		}}
+		else if(plh==2){
+		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
+		cout<<" Harga Barang \t\t\t: "<<barang[c].sewa<<endl;
+		for(l=c;l<=c;l++){
+			cout << " Masukkan Harga Baru \t\t: "; cin >>barang[l].sewa ;	
+			cout<<" DATA BERHASIL DIEDIT\n\n";
+		}}
+		else if(plh==3){
+		cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
+		cout<<" Stock Barang \t\t\t: "<<barang[c].stock<<endl;
+		cout<<" Harga Barang \t\t\t: "<<barang[c].sewa<<endl;
+		for(l=c;l<=c;l++){
+			cout << " Masukkan Stock Terbaru      : "; cin >>barang[l].stock;	
+			cout << " Masukkan Harga Baru \t\t: "; cin >>barang[l].sewa ;	
+			cout<<" DATA BERHASIL DIEDIT\n\n";
+		}}
+		else if(plh==4){
+		menukel();
 		}
-		cout<<" DATA BERHASIL DIEDIT\n\n";
-	}}
+		}
+	}
 	{
 		cout<<endl;
 		system("pause");
@@ -384,7 +375,6 @@ void transpinjam(){
 				cout<<	"\t\t\tTransaksi Peminjaman     			   "<<endl;//input barang berdasarkan jumlah  barang yang mau di input
 		    	cout << "\t ------------------------------------------------ "<<endl;
 				cout<<endl;
-				
 				cout<<" Masukan data Pinjaman Ke \t: "<<d+1<<endl;
 				cout<<" Kode Pinjaman \t\t\t: ";scanf("%d%c", &pinjambrg[d].kodepinjam, &temp);
 				cout<<" Kode barang \t\t\t: ";scanf("%d%c", &pinjambrg[d].kB, &temp);
@@ -393,7 +383,6 @@ void transpinjam(){
 					if(barang[c].kodeB == pinjambrg[d].kB){
 						cout<<" Nama barang \t\t\t: "<<barang[c].Nama<<endl;
 					
-				
 				cout<<" PT Penyewa barang \t\t: ";getline(cin,pinjambrg[d].pt);
 				cout<<" Nama perwakilan Penyewa barang : ";getline(cin,pinjambrg[d].Namap);
 				cout<<" Alamat Penyewa \t\t: ";getline(cin, pinjambrg[d].alamat);
@@ -403,17 +392,28 @@ void transpinjam(){
 				lp = (pinjambrg[d].tglbalik-pinjambrg[d].tglpin)/1000000;
 				cout<<" Lama Pinjaman \t\t\t: "<<lp<<" Hari"<<endl;
 				cout<<" Banyak barang yang di pinjam  \t: ";scanf("%d%c", &pinjambrg[d].dipinjam, &temp);
+				cout<<endl;
+				if(pinjambrg[d].dipinjam>stok){
+					cout<<"Stok Barang tidak cukup, tidak bisa melakukan peminjaman"<<endl;
+					pinjambrg[d].dipinjam=0;
+					d--;
+					system("pause");
+					system("cls");
+					
+					menupnj();
+				}else{				
 				hs = pinjambrg[d].dipinjam*barang[d].sewa;
 				cout<<" Harga Sewa \t\t\t: "<<hs;
 				cout<<endl;
 				cout<<" Status dipinjam (y) ? \t\t: ";cin>>pinjambrg[d].status;
-				cout<<endl;
+				cout<<endl;}
 			} else if (barang[c].kodeB != pinjambrg[d].kB){
 						cout<<"\n Data barang Tidak Ditemukan \n";
 						system("pause");
 						system("cls");
-						transpinjam();
-					}		
+						d--;
+						menupnj();
+					}	
 			cout<<"Apakah Anda Ingin Menambahkan Data Lagi ? (y/n) :";cin>>yn;
 			if(yn=='y'||yn=='Y'){
 				transpinjam();
@@ -424,7 +424,6 @@ void transpinjam(){
 				menupnj();}
 			
 				}
-				
 }
 
 
@@ -450,14 +449,20 @@ void pengembalian(){
 					}
 					cout<<" Tanggal Pinjam (DDMMYYYY)\t:"<<pinjambrg[f].tglpin;
 					cout<<endl;
-					cout<<" Tanggal Balik (DDMMYYYY)\t:"<<pinjambrg[f].tglbalik;
+					cout<<" Tanggal Balik (DDMMYYYY)\t:";scanf("%d%c", &pinjambrg[d].tblk, &temp);
 					cout<<endl;
-					lp = (pinjambrg[f].tglbalik-pinjambrg[f].tglpin)/1000000;
-					cout<<" Lama Pinjaman \t\t\t:"<<lp<<" Hari"<<endl;
-					cout<<endl;
+					lpin = (pinjambrg[f].tblk-pinjambrg[f].tglpin)/1000000; 
+					cout<<" Lama Pinjaman \t\t\t:"<<lpin<<" Hari"<<endl;
+					
+					if (lpin > lp){
+					cout<<" Anda Telat      \t\t:"<<lpin-lp<<" Hari"<<endl;
+					denda = (lpin-lp)*10000;
+					cout<<" Dikenakan denda  \t\t:Rp"<<denda<<endl;}
+					else {					
+					denda=0;}
 					cout<<" banyak barang yang di pinjam  \t:"<<pinjambrg[f].dipinjam;
 					cout<<endl;
-					hs = pinjambrg[f].dipinjam*barang[f].sewa;
+					hs = (pinjambrg[f].dipinjam*barang[f].sewa)+denda;
 					cout<<" Harga Sewa \t\t\t:"<<hs<<endl;
 					cout<<" Status \t\t\t: "<<pinjambrg[f].status;
 					if((pinjambrg[f].status == 'y') || (pinjambrg[f].status == 'Y')){
@@ -503,7 +508,7 @@ void laporanbarang(){
 			cout<<"|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|\n";
 			cout<<"|  No    Kode Peminjaman         Nama barang       Nama Peminjam            Alamat         Tanggal Pinjam        Tanggal Balik          Status             Qty    |\n";
 			cout<<"|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|\n";
-			for(g=0;g<=b;g++){ 
+			for(g=0;g<=d;g++){ 
 				if(pinjambrg[g].kB==barang[g].kodeB){
 					cout<<"| "<<setw(2)<<g+1<<setw(11)<<pinjambrg[g].kodepinjam<<setw(25)<<barang[g].Nama<<setw(17)<<pinjambrg[g].Namap
 					<<setw(25)<<pinjambrg[g].alamat<<setw(18)<<pinjambrg[g].tglpin<<setw(22)<<pinjambrg[g].tglbalik
@@ -600,12 +605,20 @@ void pinmemb(){
 				lama = (pmemb[p].tbalik-pmemb[p].tpin)/1000000;
 				cout<<" Lama Pinjaman \t\t\t: "<<lama<<" Hari"<<endl;
 				cout<<" banyak barang yang di pinjam  \t: ";scanf("%d%c", &pmemb[p].dp, &temp);
+				if(pmemb[r].dp>stok){
+					cout<<"Stok Barang tidak cukup, tidak bisa melakukan peminjaman"<<endl;
+					p--;
+					pmemb[r].dp=0;
+					system("pause");
+					system("cls");
+					menupnj();
+					}else{		
 				discmem = (pmemb[p].dp*barang[p].sewa)*0.2;
 				hsmem = (pmemb[p].dp*barang[p].sewa)- discmem;
 				cout<<" Harga Sewa \t\t\t: "<<hsmem;
 				cout<<endl;
 				cout<<" Status dipinjam (y) ? \t\t: ";cin>>pmemb[p].statp;
-				cout<<endl;
+				cout<<endl;}
 			} else if (brgmemb[i].kodmemb != pmemb[p].km){
 						cout<<"\n Data Member Tidak Ditemukan \n";
 						system("pause");
@@ -653,19 +666,26 @@ void blkm(){
 					}
 					cout<<" Tanggal Pinjam (DDMMYYYY)\t:"<<pmemb[r].tpin;
 					cout<<endl;
-					cout<<" Tanggal Balik (DDMMYYYY)\t:"<<pmemb[r].tbalik;
+					cout<<" Tanggal Balik (DDMMYYYY)\t:";scanf("%d%c", &pmemb[r].tbl, &temp);
 					cout<<endl;
-					lama = (pmemb[r].tbalik-pmemb[r].tpin)/1000000;
-					cout<<" Lama Pinjaman \t\t\t:"<<lama<<" Hari"<<endl;
+					lampin = (pmemb[r].tbl-pmemb[r].tpin)/1000000;
+					cout<<" Lama Pinjaman \t\t\t:"<<lampin<<" Hari"<<endl;
 					cout<<endl;
+					if (lampin > lama){
+					cout<<" Anda Telat      \t\t:"<<lampin-lama<<" Hari"<<endl;
+					denda = (lampin-lama)*10000;
+					cout<<" Dikenakan denda  \t\t:Rp"<<denda<<endl;}
+					else {					
+					denda=0;}
 					cout<<" banyak barang yang di pinjam  \t:"<<pmemb[r].dp;
+					cout<<endl;	
+					discmem = (pmemb[r].dp*barang[r].sewa)*0.2;
+					hsmem = ((pmemb[r].dp*barang[r].sewa)-discmem)+denda;
+					cout<<" Harga Sewa \t\t\t:"<<hsmem;
 					cout<<endl;
-				discmem = (pmemb[r].dp*barang[r].sewa)*0.2;
-				hsmem = (pmemb[r].dp*barang[r].sewa)- discmem;
-				cout<<" Harga Sewa \t\t\t:"<<hsmem;
-				cout<<endl;
+				
 					cout<<" Status dibalik (b) ? \t\t:";cin>>pmemb[r].statp;
-				cout<<endl;
+					cout<<endl;
 					if((pmemb[r].statp == 'b') || (pmemb[r].statp == 'B')){
 						cout<<" (di Pinjam) "<<endl;
 					}else{
@@ -773,7 +793,7 @@ void vpm(){
 			cout<<"|-------------------------------------------------------------------------------------------------------------------------------------------------------------|\n";
 			cout<<"|  No    Kode Peminjaman       Nama barang       Nama Peminjam            Alamat         Tanggal Pinjam        Tanggal Balik          Status            Qty   |\n";
 			cout<<"|-------------------------------------------------------------------------------------------------------------------------------------------------------------|\n";
-		for(q=0;q<=b;q++){ 
+		for(q=0;q<=p;q++){ 
 				if(pmemb[q].kb==barang[q].kodeB){
 				cout<<"| "<<setw(2)<<q+1<<setw(11)<<pmemb[q].kopinj<<setw(25)<<barang[q].Nama<<setw(17)<<brgmemb[q].namemb
 					<<setw(25)<<brgmemb[q].almemb<<setw(18)<<pmemb[q].tpin<<setw(22)<<pmemb[q].tbalik
