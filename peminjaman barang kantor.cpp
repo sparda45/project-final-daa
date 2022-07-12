@@ -611,7 +611,7 @@ void pinmemb(){
 					pmemb[r].dp=0;
 					system("pause");
 					system("cls");
-					menupnj();
+					menmemb();
 					}else{		
 				discmem = (pmemb[p].dp*barang[p].sewa)*0.2;
 				hsmem = (pmemb[p].dp*barang[p].sewa)- discmem;
