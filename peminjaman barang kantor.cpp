@@ -391,17 +391,18 @@ void transpinjam(){
 				cout<<" Tanggal Balik (DDMMYYYY)\t: ";scanf("%d%c", &pinjambrg[d].tglbalik, &temp);
 				lp = (pinjambrg[d].tglbalik-pinjambrg[d].tglpin)/1000000;
 				cout<<" Lama Pinjaman \t\t\t: "<<lp<<" Hari"<<endl;
-				cout<<" Banyak barang yang di pinjam  \t: ";scanf("%d%c", &pinjambrg[d].dipinjam, &temp);
+				cout<<" Banyak barang yang di pinjam  \t: ";
+				cin>>pinjambrg[d].dipinjam;
 				cout<<endl;
+				stok=barang[d].stock;
 				if(pinjambrg[d].dipinjam>stok){
 					cout<<"Stok Barang tidak cukup, tidak bisa melakukan peminjaman"<<endl;
 					pinjambrg[d].dipinjam=0;
 					d--;
 					system("pause");
 					system("cls");
-					
 					menupnj();
-				}else{				
+				}else {				
 				hs = pinjambrg[d].dipinjam*barang[d].sewa;
 				cout<<" Harga Sewa \t\t\t: "<<hs;
 				cout<<endl;
@@ -605,10 +606,11 @@ void pinmemb(){
 				lama = (pmemb[p].tbalik-pmemb[p].tpin)/1000000;
 				cout<<" Lama Pinjaman \t\t\t: "<<lama<<" Hari"<<endl;
 				cout<<" banyak barang yang di pinjam  \t: ";scanf("%d%c", &pmemb[p].dp, &temp);
-				if(pmemb[r].dp>stok){
+				stok=barang[p].stock;
+				if(pmemb[p].dp>stok){
 					cout<<"Stok Barang tidak cukup, tidak bisa melakukan peminjaman"<<endl;
+					pmemb[p].dp=0;
 					p--;
-					pmemb[r].dp=0;
 					system("pause");
 					system("cls");
 					menmemb();
